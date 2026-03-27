@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Application Form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="container">
+        <header class="form-header">
+            <h1>Application Form</h1>
+            <p>Please fill out the form carefully to proceed.</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="step-indicator active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Personal</span>
+            </div>
+            <div class="step-indicator" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Category</span>
+            </div>
+            <div class="step-indicator" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Details</span>
+            </div>
+            <div class="step-indicator" data-step="4">
+                <span class="step-number">4</span>
+                <span class="step-label">Review</span>
+            </div>
+        </div>
+
+        <form id="multiStepForm" novalidate>
+            <section class="form-step active" id="step1">
+                <h2>Step 1: Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    <span class="error-message" id="error-fullName"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <span class="error-message" id="error-email"></span>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select your country</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="error-message" id="error-country"></span>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-next" onclick="nextStep(1)">Next</button>
+                </div>
+            </section>
+
+            <section class="form-step" id="step2">
+                <h2>Step 2: Application Category</h2>
+                <p>Please select your application type:</p>
+                <div class="category-options">
+                    <label class="category-card">
+                        <input type="radio" name="category" value="Fully Funded" required>
+                        <div class="card-content">
+                            <h3>Fully Funded</h3>
+                            <p>We cover all your expenses.</p>
+                        </div>
+                    </label>
+                    <label class="category-card">
+                        <input type="radio" name="category" value="Invitation Letter">
+                        <div class="card-content">
+                            <h3>Invitation Letter</h3>
+                            <p>You need an invitation for your visa.</p>
+                        </div>
+                    </label>
+                    <label class="category-card">
+                        <input type="radio" name="category" value="Self-Funded">
+                        <div class="card-content">
+                            <h3>Self-Funded</h3>
+                            <p>You will cover your own costs.</p>
+                        </div>
+                    </label>
+                </div>
+                <span class="error-message" id="error-category"></span>
+                <div class="button-group">
+                    <button type="button" class="btn btn-back" onclick="prevStep(2)">Back</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Next</button>
+                </div>
+            </section>
+
+            <section class="form-step" id="step3">
+                <h2>Step 3: Specific Details</h2>
+                
+                <div id="logic-fully-funded" class="dynamic-section">
+                    <div class="form-group">
+                        <label for="motivation">Motivation</label>
+                        <textarea id="motivation" name="motivation" placeholder="Why do you want to join this opportunity?" rows="4"></textarea>
+                        <span class="error-message" id="error-motivation"></span>
+                    </div>
+                </div>
+
+                <div id="logic-invitation" class="dynamic-section">
+                    <div class="form-group">
+                        <label for="passportNumber">Passport Number</label>
+                        <input type="text" id="passportNumber" name="passportNumber" placeholder="Enter your passport number">
+                        <span class="error-message" id="error-passportNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelPurpose">Purpose of Travel</label>
+                        <textarea id="travelPurpose" name="travelPurpose" placeholder="Explain your purpose of travel" rows="3"></textarea>
+                        <span class="error-message" id="error-travelPurpose"></span>
+                    </div>
+                </div>
+
+                <div id="logic-self-funded" class="dynamic-section">
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="budgetConfirm" name="budgetConfirm">
+                            I confirm that I can cover my own expenses.
+                        </label>
+                        <span class="error-message" id="error-budgetConfirm"></span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-back" onclick="prevStep(3)">Back</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(3)">Review Application</button>
+                </div>
+            </section>
+
+            <section class="form-step" id="step4">
+                <h2>Step 4: Review Your Application</h2>
+                <div id="summaryContent" class="summary-container">
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-back" onclick="prevStep(4)">Back</button>
+                    <button type="submit" class="btn btn-submit">Submit Application</button>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <script src="form.js"></script>
+</body>
+</html>
